@@ -92,7 +92,7 @@ You can import data in bulk for Stocks and Products via a `.txt` file. The struc
 ## 📄 Project Report
 
 For a deeper look at the mathematical formulas (ILP, Column Generation) and the design architecture of the RL model, please refer to the course report:
-👉 **[Read the detailed report (in Vietnamese)](https://www.google.com/search?q=docs/Cutting_Stock_2D_Report_VN.pdf)**
+👉 **[Read the detailed report (in Vietnamese)](docs/Cutting_Stock_2D_Report_VN.pdf)**
 
 ---
 
