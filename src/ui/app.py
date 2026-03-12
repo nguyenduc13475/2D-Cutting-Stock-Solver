@@ -98,8 +98,10 @@ class CSP2DApp:
         canvas.config(yscrollcommand=scrollbar.set)
 
         list_container = tk.Frame(canvas, bg="#444444")
-        canvas.create_window((0, 0), window=list_container, anchor="nw")
+        frame_id = canvas.create_window((0, 0), window=list_container, anchor="nw")
+        
         list_container.bind("<Configure>", lambda e: canvas.config(scrollregion=canvas.bbox("all")))
+        canvas.bind("<Configure>", lambda e: canvas.itemconfig(frame_id, width=e.width))
         canvas.bind_all("<MouseWheel>", self._on_mouse_wheel)
 
         # Table Headers
@@ -128,18 +130,22 @@ class CSP2DApp:
         tk.Button(top_bar, text="Clear Canvas", command=self._clear_results).pack(side="left", padx=10)
         tk.Button(top_bar, text="Save Solution (.pkl)", command=self._save_result).pack(side="left", padx=10)
 
-        # Metrics Labels
-        self.lbl_time = tk.Label(top_bar, text="Time: 0.0s", bg="#222222", fg="white")
-        self.lbl_time.pack(side="right", padx=15)
+        # Group the Label metrics into a single Frame.
+        metrics_frame = tk.Frame(top_bar, bg="#222222")
+        metrics_frame.pack(side="right", fill="x", padx=10)
+
+        # Pack the labels from left to right inside the metrics_frame (reduce padx to 10 for a more compact layout).
+        self.lbl_ratio = tk.Label(metrics_frame, text="Waste Ratio: 0%", bg="#222222", fg="white")
+        self.lbl_ratio.pack(side="left", padx=10)
         
-        self.lbl_stocks = tk.Label(top_bar, text="Stocks Used: 0", bg="#222222", fg="white")
-        self.lbl_stocks.pack(side="right", padx=15)
+        self.lbl_waste = tk.Label(metrics_frame, text="Waste Area: 0.0", bg="#222222", fg="white")
+        self.lbl_waste.pack(side="left", padx=10)
         
-        self.lbl_waste = tk.Label(top_bar, text="Waste Area: 0.0", bg="#222222", fg="white")
-        self.lbl_waste.pack(side="right", padx=15)
-        
-        self.lbl_ratio = tk.Label(top_bar, text="Waste Ratio: 0%", bg="#222222", fg="white")
-        self.lbl_ratio.pack(side="right", padx=15)
+        self.lbl_stocks = tk.Label(metrics_frame, text="Stocks Used: 0", bg="#222222", fg="white")
+        self.lbl_stocks.pack(side="left", padx=10)
+
+        self.lbl_time = tk.Label(metrics_frame, text="Time: 0.0s", bg="#222222", fg="white")
+        self.lbl_time.pack(side="left", padx=10)
 
         # Drawing Canvas
         self.result_canvas = tk.Canvas(region, bg="#333333")
@@ -168,11 +174,11 @@ class CSP2DApp:
     def _add_row(self, container: tk.Frame, is_product: bool):
         row_frame = tk.Frame(container, bg="#444444")
         row_frame.pack(side="top", fill="x", padx=10, pady=2)
-        row_frame.grid_columnconfigure((0, 1, 2), weight=1, minsize=80)
+        row_frame.grid_columnconfigure((0, 1, 2), weight=1, minsize=60)
 
-        w_entry = tk.Entry(row_frame, justify="center")
-        h_entry = tk.Entry(row_frame, justify="center")
-        q_entry = tk.Entry(row_frame, justify="center")
+        w_entry = tk.Entry(row_frame, width=8, justify="center")
+        h_entry = tk.Entry(row_frame, width=8, justify="center")
+        q_entry = tk.Entry(row_frame, width=8, justify="center")
         
         w_entry.grid(row=0, column=0, sticky="ew", padx=2)
         h_entry.grid(row=0, column=1, sticky="ew", padx=2)

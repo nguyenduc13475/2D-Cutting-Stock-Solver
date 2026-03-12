@@ -6,6 +6,10 @@
 
 A complete software system that solves the **2D Cutting Stock Problem (2D CSP)**. This project combines Combinatorial Optimization, Heuristics, and Deep Reinforcement Learning, all packaged in a Clean OOP architecture with a user-friendly UI.
 
+## 🎥 App Demo
+
+![2D Cutting Stock Solver Demo](assets/demo.gif)
+
 ---
 
 ## 🌟 Approaches (Implemented Solvers)
@@ -65,7 +69,8 @@ pip install -r requirements.txt
 ### 2. Download Pre-trained Model (for RL Solver)
 
 Reinforcement Learning algorithms require a weight file.
-👉 **[Download the `model.ckpt` file from the Releases section.](https://www.google.com/search?q=https://github.com/nguyenduc13475/2D-Cutting-Stock-Solver/releases)** and place it directly in the project's root directory (same level as `main.py`).
+
+👉 **Download the `model.ckpt` file from the Releases section** and place it directly in the project's root directory (same level as `main.py`).
 
 ### 3. Start the application
 
